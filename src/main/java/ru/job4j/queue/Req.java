@@ -1,5 +1,12 @@
 package ru.job4j.queue;
 
+/**
+ * Парсинг входящего запроса.
+ * httpRequestType - GET или POST, указывает на тип запроса.
+ * poohMode - указывает на режим работы: queue или topic
+ * sourceName - имя очереди или топика
+ * param - содержимое запроса
+ */
 public class Req {
     private final String httpRequestType;
     private final String poohMode;
