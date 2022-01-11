@@ -13,9 +13,9 @@ public class CASMap {
         queue.putIfAbsent(name, new ConcurrentLinkedQueue<>());
 
         /* put */
-        queue.get(name).add("value");
+        //queue.get(name).add("value");
 
         /* extract */
-        var text = queue.get(name, emptyQueue()).poll();
+        //var text = queue.get(name, emptyQueue()).poll();
     }
 }

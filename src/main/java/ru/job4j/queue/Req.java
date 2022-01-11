@@ -1,5 +1,7 @@
 package ru.job4j.queue;
 
+import java.util.List;
+
 /**
  * Парсинг входящего запроса.
  * httpRequestType - GET или POST, указывает на тип запроса.
@@ -22,7 +24,20 @@ public class Req {
 
     public static Req of(String content) {
         /* TODO parse a content */
-        return new Req(null, null, null, null);
+        String type = "";
+        String mode = "";
+        String name = "";
+        String pr = "";
+/*        if (content.startsWith("POST")) {
+            type = "POST";
+        } else if (content.startsWith("GET")) {
+            type = "GET";
+        }
+        if (content.)*/
+        List<String> list = content.lines().toList();
+        String first = list.get(0);
+        String last = list.get(list.size() - 1);
+        return new Req(type, mode, name, pr);
     }
 
     public String httpRequestType() {
