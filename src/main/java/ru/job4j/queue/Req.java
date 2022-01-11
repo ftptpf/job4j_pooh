@@ -27,17 +27,27 @@ public class Req {
         String type = "";
         String mode = "";
         String name = "";
-        String pr = "";
-/*        if (content.startsWith("POST")) {
-            type = "POST";
-        } else if (content.startsWith("GET")) {
-            type = "GET";
-        }
-        if (content.)*/
+        String parameter = "";
+
         List<String> list = content.lines().toList();
         String first = list.get(0);
         String last = list.get(list.size() - 1);
-        return new Req(type, mode, name, pr);
+
+        String[] middleFirst = first.split(" ", 3);
+        String[] middle = middleFirst[1].split("/");
+
+        if (first.startsWith("POST")) {
+            type = "POST";
+            parameter = last;
+        } else if (first.startsWith("GET")) {
+            type = "GET";
+            if (middle[1].equals("topic")) {
+                parameter = middle[3];
+            }
+        }
+        mode = middle[1];
+        name = middle[2];
+        return new Req(type, mode, name, parameter);
     }
 
     public String httpRequestType() {
