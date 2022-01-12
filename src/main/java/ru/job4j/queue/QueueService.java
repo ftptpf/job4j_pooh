@@ -1,5 +1,6 @@
 package ru.job4j.queue;
 
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
@@ -29,7 +30,11 @@ public class QueueService implements Service {
             queue.get(key).add(param);
         } else if ("GET".equals(type)) {
             /* Извлекаем сообщение из начала очереди при этом удаляя его */
-            text = queue.get(key).poll();
+            //text = queue.get(key).poll();
+            Optional<String> value = Optional.ofNullable(queue.get(key).poll());
+            if (value.isPresent()) {
+                text = value.get();
+            }
             status = "200";
         }
         return new Resp(text, status);

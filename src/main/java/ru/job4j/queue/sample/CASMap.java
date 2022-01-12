@@ -1,4 +1,4 @@
-package ru.job4j.queue;
+package ru.job4j.queue.sample;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
