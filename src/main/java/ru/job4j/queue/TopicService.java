@@ -10,6 +10,9 @@ public class TopicService implements Service {
 
     @Override
     public Resp process(Req req) {
-        return null;
+        String text = "";
+        String status = "";
+
+        return new Resp(text, status);
     }
 }
