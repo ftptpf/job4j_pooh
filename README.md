@@ -4,8 +4,8 @@
 
 ## Реализация аналога асинхронной очереди
 
-Приложение запускает Socket и ждет клиентов.
-Клиенты могут быть двух типов: отправители (publisher), получатели (subscriber).
+Приложение запускает Socket и ждет клиентов.<br>
+Клиенты могут быть двух типов: отправители (publisher), получатели (subscriber).<br>
 В качестве протокола используем HTTP.
 
 Pooh будет иметь два режима: queue, topic.
@@ -19,14 +19,14 @@ Pooh будет иметь два режима: queue, topic.
 Если в очередь приходят несколько получателей, то они поочередно получают сообщения из очереди.
 Каждое сообщение в очереди может быть получено только одним получателем.
 
-Примеры запросов.
-POST запрос должен добавить элементы в очередь weather.
-curl -X POST -d "temperature=18" http://localhost:9000/queue/weather
-queue указывает на режим «очередь».
+Примеры запросов.<br>
+POST запрос должен добавить элементы в очередь weather.<br>
+curl -X POST -d "temperature=18" http://localhost:9000/queue/weather<br>
+queue указывает на режим «очередь».<br>
 weather указывает на имя очереди.
 
-GET запрос должен получить элементы из очереди weather.
-curl -X GET http://localhost:9000/queue/weather
+GET запрос должен получить элементы из очереди weather.<br>
+curl -X GET http://localhost:9000/queue/weather<br>
 Ответ: temperature=18
 
 ### Topic.
@@ -43,19 +43,19 @@ curl -X GET http://localhost:9000/queue/weather
 
 Примеры запросов.
 
-Отправитель.
-POST /topic/weather -d "temperature=18"
-topic указывает на режим «топик».
+Отправитель.<br>
+POST /topic/weather -d "temperature=18"<br>
+topic указывает на режим «топик».<br>
 weather указывает на имя топика.
 
-Получатель.
-GET /topic/weather/1
-1 - ID получателя.
+Получатель.<br>
+GET /topic/weather/1<br>
+1 - ID получателя.<br>
 Ответ: temperature=18
 
 ### Архитектура проекта.
 
 ![Alt-текст](https://github.com/ftptpf/job4j_pooh/blob/c0db92fa1f26b0cf74ce65bad5acd771d9540678/resources/imageTaskPreview.png "Архитектура проекта")
 
-Req - класс, служит для парсинга входящего запроса.
+Req - класс, служит для парсинга входящего запроса.<br>
 Resp - ответ от сервиса.
