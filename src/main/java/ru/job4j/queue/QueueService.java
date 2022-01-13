@@ -28,14 +28,17 @@ public class QueueService implements Service {
             queue.putIfAbsent(key, new ConcurrentLinkedQueue<>());
             /* Добавляем в очередь полученный параметр */
             queue.get(key).add(param);
+            status = "200";
         } else if ("GET".equals(type)) {
             /* Извлекаем сообщение из начала очереди при этом удаляя его */
-            //text = queue.get(key).poll();
-            Optional<String> value = Optional.ofNullable(queue.get(key).poll());
-            if (value.isPresent()) {
-                text = value.get();
+            Optional<ConcurrentLinkedQueue<String>> mapValue = Optional.ofNullable(queue.get(key));
+            if (mapValue.isPresent()) {
+                Optional<String> queueValue = Optional.ofNullable(queue.get(key).poll());
+                if (queueValue.isPresent()) {
+                    text = queueValue.get();
+                    status = "200";
+                }
             }
-            status = "200";
         }
         return new Resp(text, status);
     }

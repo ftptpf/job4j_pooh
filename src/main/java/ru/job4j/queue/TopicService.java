@@ -1,6 +1,5 @@
 package ru.job4j.queue;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -32,21 +31,18 @@ public class TopicService implements Service {
         if ("POST".equals(type)) {
             /* Добавляем значение параметра в конец каждой индивидуальной очереди */
             topic.get(key).forEachValue(2, value -> value.add(param));
+            status = "200";
         } else if ("GET".equals(type)) {
             /* Если нет значения для соответствующего ключа - создаем новый топик */
             topic.putIfAbsent(key, new ConcurrentHashMap<>());
             /* Если впервые получаем данные из топика – создаем индивидуальную пустую очередь под клиента */
             topic.get(key).putIfAbsent(param, new ConcurrentLinkedQueue<>());
             /* Сообщение забирается из начала индивидуальной очереди получателя и удаляется */
-            //text = topic.get(key).get(param).poll();
             Optional<String> value = Optional.ofNullable(topic.get(key).get(param).poll());
             if (value.isPresent()) {
                 text = value.get();
+                status = "200";
             }
-/*            if (text == null) {
-                text = "";
-            }*/
-            status = "200";
         }
         return new Resp(text, status);
     }

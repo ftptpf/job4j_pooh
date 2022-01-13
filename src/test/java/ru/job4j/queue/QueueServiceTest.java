@@ -20,20 +20,16 @@ public class QueueServiceTest {
                 new Req("GET", "queue", "weather", null)
         );
         assertThat(result.text(), is("temperature=18"));
+        assertThat(result.status(), is("200"));
     }
 
     @Test
-    public void whenNotPostAndGetQueue() {
+    public void whenNotPostButGetQueue() {
         QueueService queueService = new QueueService();
-/*        String paramForPostMethod = "temperature=18";
-        *//* Добавляем данные в очередь weather. Режим queue *//*
-        queueService.process(
-                new Req("POST", "queue", "weather", paramForPostMethod)
-        );*/
-        /* Забираем данные из очереди weather ничего не добавив в неё. Режим queue */
         Resp result = queueService.process(
                 new Req("GET", "queue", "weather", null)
         );
         assertThat(result.text(), is(""));
+        assertThat(result.status(), is("204"));
     }
 }
